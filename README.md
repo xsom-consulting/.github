@@ -36,14 +36,15 @@ Sur un dépôt privé, chaque exécution consomme des minutes payantes : préfé
 
 GitHub n'a pas de sous-groupes. Chaque dépôt porte un topic qui dit ce qu'il est :
 
-| Topic | Pour |
-|---|---|
-| `produit` | ce que nous vendons (fleet, secret-guard, model-advisor) |
-| `site` | sites publiés |
-| `agent` | agents et veille (xsom-agents, veille-collect) |
-| `automatisation` | scripts et workflows (automatisations) |
-| `labo` | essais et prototypes, sans engagement de maintenance |
-| `modele` | dépôts modèles |
-| `interne` | outillage, sécurité, profil |
+| Topic | Pour | Dépôts au 16/11/2026 |
+|---|---|---|
+| `produit` | ce que nous vendons | fleet, secret-guard, model-advisor |
+| `site` | sites publiés | ai-website, infra-xsom_website |
+| `agent` | agents, veille, sécurité automatisée | xsom-agents, veille-collect, personal-agent, security, infra-linkedin_llm_bot |
+| `automatisation` | scripts sans IA | automatisations |
+| `modele` | dépôts modèles | template-projet-ia |
+| `interne` | règles et planification | .github, product-planning |
+| `veille-oss` | copies de projets open source étudiés pour la veille concurrentielle | litellm, akto, promptfoo, presidio, ggshield, betterleaks, gitleaks, trufflehog, kong, gravitee-api-management, giskard-oss, llm-guard, skill-scanner, defenseclaw |
+| `labo` | essais et prototypes, sans engagement de maintenance | aucun pour l'instant |
 
 Filtre : `https://github.com/orgs/xsom-consulting/repositories?q=topic:produit`.
