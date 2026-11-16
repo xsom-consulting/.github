@@ -1,0 +1,33 @@
+# Workflow réutilisable : Go (vet, test, govulncheck).
+# Appel : jobs.go.uses: xsom-consulting/.github/.github/workflows/ci-go.yml@main
+name: CI Go
+
+on:
+  workflow_call:
+    inputs:
+      dossier:
+        description: Dossier qui contient go.mod
+        type: string
+        default: "."
+
+permissions:
+  contents: read
+
+jobs:
+  go:
+    name: Go (vet, test, govulncheck)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: ${{ inputs.dossier }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: ${{ inputs.dossier }}/go.mod
+      - run: go mod verify
+      - run: go vet ./...
+      - run: go test -count=1 ./...
+      - name: govulncheck
+        run: go run golang.org/x/vuln/cmd/govulncheck@v1.8.0 ./...
