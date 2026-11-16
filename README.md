@@ -32,19 +32,24 @@ Sur un dépôt privé, chaque exécution consomme des minutes payantes : préfé
 - `template-projet-ia` : point de départ de tout nouveau projet (règles pour l'IA, CI, secrets).
 - PR et tickets : `.github/PULL_REQUEST_TEMPLATE.md`, `.github/ISSUE_TEMPLATE/`, appliqués aux dépôts qui n'ont pas les leurs.
 
-## Ranger les dépôts : les topics
+## Ranger les dépôts : groupes, topics, préfixes
 
-GitHub n'a pas de sous-groupes. Chaque dépôt porte un topic qui dit ce qu'il est :
+GitHub n'a pas de sous-groupes. Un groupe, c'est trois choses : un topic (le filtre), un préfixe pour tout nouveau dépôt (GitHub trie par ordre alphabétique), et une section de la page d'accueil réservée aux membres (`.github-private`).
 
-| Topic | Pour | Dépôts au 16/11/2026 |
+| Groupe (topic) | Préfixe des nouveaux dépôts | Dépôts au 16/11/2026 |
 |---|---|---|
-| `produit` | ce que nous vendons | fleet, secret-guard, model-advisor |
-| `site` | sites publiés | ai-website, infra-xsom_website |
-| `agent` | agents, veille, sécurité automatisée | xsom-agents, veille-collect, personal-agent, security, infra-linkedin_llm_bot |
-| `automatisation` | scripts sans IA | automatisations |
-| `modele` | dépôts modèles | template-projet-ia |
-| `interne` | règles et planification | .github, product-planning |
-| `veille-oss` | copies de projets open source étudiés pour la veille concurrentielle | litellm, akto, promptfoo, presidio, ggshield, betterleaks, gitleaks, trufflehog, kong, gravitee-api-management, giskard-oss, llm-guard, skill-scanner, defenseclaw |
-| `labo` | essais et prototypes, sans engagement de maintenance | aucun pour l'instant |
+| `produit` | aucun : noms de marque | fleet, secret-guard, model-advisor |
+| `agents` | `agent-` | xsom-agents, veille-collect, security, personal-agent, agent-linkedin |
+| `sites` | `site-` | ai-website, site-xsom |
+| `microservices` | `svc-` | aucun |
+| `infrastructure` | `infra-` | .github |
+| `templates` | `template-` | template-projet-ia |
+| `data` | `data-` | aucun |
+| `automation` | `auto-` | automatisations |
 
-Filtre : `https://github.com/orgs/xsom-consulting/repositories?q=topic:produit`.
+- Un groupe vide n'a pas de dépôt d'avance : il naît avec son premier dépôt.
+- Les produits, surtout ceux publiés en open source, gardent leur nom de marque, sans préfixe.
+- Plusieurs services livrés ensemble vont dans un seul dépôt `svc-…`, un dossier par service.
+- Renommer un dépôt existant : seulement si aucun code ne l'importe par son nom (un module Go, par exemple). GitHub redirige l'ancien nom.
+
+Filtre : `https://github.com/orgs/xsom-consulting/repositories?q=topic:agents`.
