@@ -1,0 +1,46 @@
+# Workflow réutilisable : Python (ruff, pytest).
+# Appel : jobs.python.uses: xsom-consulting/.github/.github/workflows/ci-python.yml@main
+name: CI Python
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        type: string
+        default: "3.12"
+      dossier:
+        description: Dossier du projet Python
+        type: string
+        default: "."
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: Python (ruff, pytest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: ${{ inputs.dossier }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version }}
+      - name: Dépendances
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+          pip install ruff pytest
+      - name: ruff
+        run: ruff check .
+      - name: pytest (si le dépôt a des tests)
+        run: |
+          if find . -name 'test_*.py' -not -path './.venv/*' | grep -q .; then
+            pytest -q --import-mode=importlib
+          else
+            echo "Aucun test : rien à lancer."
+          fi
